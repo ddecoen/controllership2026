@@ -25,6 +25,12 @@ export default function RoadmapTimeline() {
           status: "in-progress",
         },
         {
+          category: "Tax & Compliance",
+          task: "Go live with Taxwire for Sales Tax automation",
+          status: "in-progress",
+          highlight: true,
+        },
+        {
           category: "Audit Preparation",
           task: "Book audit clean-up entries (Stock Comp & ASC 606)",
           status: "in-progress",
@@ -65,6 +71,12 @@ export default function RoadmapTimeline() {
           category: "Fundraising",
           task: "Post-close accounting and capital deployment tracking",
           status: "planned",
+        },
+        {
+          category: "Tax & Compliance",
+          task: "Implement Rivet for Tax Preparation and filing",
+          status: "planned",
+          highlight: true,
         },
         {
           category: "Audit",
@@ -286,6 +298,7 @@ function getCategoryColor(category: string): string {
     Operations: "text-coder-black",
     "Tech Stack": "text-coder-black",
     "EMEA Expansion": "text-coder-black",
+    "Tax & Compliance": "text-coder-black",
   };
   return colors[category] || "text-coder-darkGray";
 }
