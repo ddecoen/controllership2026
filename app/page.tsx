@@ -1,3 +1,5 @@
+"use client";
+
 import RoadmapTimeline from "@/components/RoadmapTimeline";
 import { useState } from "react";
 
@@ -173,8 +175,6 @@ function ObjectiveCard({
     </div>
   );
 }
-
-"use client";
 
 function PrincipleItem({ text }: { text: string }) {
   return (
