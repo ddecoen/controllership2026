@@ -1,24 +1,42 @@
 "use client";
 
+interface TimelineItem {
+  category: string;
+  task: string;
+  status: "in-progress" | "planned" | "completed";
+  highlight?: boolean;
+}
+
+interface Phase {
+  phase: string;
+  title: string;
+  items: TimelineItem[];
+}
+
 export default function RoadmapTimeline() {
   const phases = [
     {
       phase: "Q1 2026",
-      title: "Foundation & Planning",
+      title: "Foundation & Due Diligence",
       items: [
         {
           category: "Fundraising",
-          task: "Prepare financial models and projections",
-          status: "in-progress",
-        },
-        {
-          category: "Fundraising",
-          task: "Develop investor pitch deck",
+          task: "Financial Due Diligence preparation and support",
           status: "in-progress",
         },
         {
           category: "Audit Preparation",
-          task: "Initial meeting with Deloitte audit team",
+          task: "Book audit clean-up entries (Stock Comp & ASC 606)",
+          status: "in-progress",
+        },
+        {
+          category: "Audit Preparation",
+          task: "Complete equity clean-up and reconciliation",
+          status: "in-progress",
+        },
+        {
+          category: "Audit Preparation",
+          task: "Initial engagement with Deloitte audit team",
           status: "planned",
         },
         {
@@ -28,38 +46,45 @@ export default function RoadmapTimeline() {
         },
         {
           category: "Operations",
-          task: "Identify automation opportunities",
+          task: "Identify automation and efficiency opportunities",
           status: "planned",
         },
       ],
     },
     {
       phase: "Q2 2026",
-      title: "Execution & Optimization",
+      title: "Funding Close & Audit Execution",
       items: [
         {
           category: "Fundraising",
-          task: "Begin investor roadshow and meetings",
+          task: "Funding in bank by April 2026 ✓",
           status: "planned",
+          highlight: true,
         },
         {
           category: "Fundraising",
-          task: "Negotiate term sheets",
+          task: "Post-close accounting and capital deployment tracking",
           status: "planned",
         },
         {
           category: "Audit",
-          task: "Provide documentation to Deloitte",
+          task: "Provide documentation and schedules to Deloitte",
           status: "planned",
         },
         {
           category: "Audit",
-          task: "Conduct preliminary audit fieldwork",
+          task: "Support audit fieldwork and testing procedures",
           status: "planned",
+        },
+        {
+          category: "Audit",
+          task: "Complete audit by late June 2026 ✓",
+          status: "planned",
+          highlight: true,
         },
         {
           category: "Operations",
-          task: "Implement accounting automation tools",
+          task: "Implement process improvements identified in Q1",
           status: "planned",
         },
         {
@@ -71,67 +96,62 @@ export default function RoadmapTimeline() {
     },
     {
       phase: "Q3 2026",
-      title: "Validation & Refinement",
+      title: "Optimization & Scaling",
       items: [
         {
-          category: "Fundraising",
-          task: "Close funding round",
-          status: "planned",
-        },
-        {
-          category: "Audit",
-          task: "Complete Deloitte audit procedures",
-          status: "planned",
-        },
-        {
-          category: "Audit",
-          task: "Address audit findings and recommendations",
+          category: "Operations",
+          task: "Optimize accounting workflows for efficiency",
           status: "planned",
         },
         {
           category: "Operations",
-          task: "Train team on new processes and tools",
+          task: "Implement automation tools and integrations",
           status: "planned",
         },
         {
           category: "Operations",
-          task: "Establish KPIs for accuracy and efficiency",
+          task: "Enhance accuracy through controls and reviews",
+          status: "planned",
+        },
+        {
+          category: "Operations",
+          task: "Train team on updated processes and systems",
+          status: "planned",
+        },
+        {
+          category: "Operations",
+          task: "Establish operational KPIs and metrics",
           status: "planned",
         },
       ],
     },
     {
       phase: "Q4 2026",
-      title: "Scale & Excellence",
+      title: "Scale & Continuous Improvement",
       items: [
         {
-          category: "Fundraising",
-          task: "Deploy capital per strategic plan",
-          status: "planned",
-        },
-        {
-          category: "Audit",
-          task: "Receive final audit opinion from Deloitte",
-          status: "planned",
-        },
-        {
-          category: "Audit",
-          task: "Implement audit recommendations",
+          category: "Operations",
+          task: "Scale processes to support company growth",
           status: "planned",
         },
         {
           category: "Operations",
-          task: "Scale processes for 2X company growth",
+          task: "Achieve measurable efficiency and accuracy gains",
           status: "planned",
         },
         {
           category: "Operations",
-          task: "Achieve 95%+ accuracy and 30% efficiency gains",
+          task: "Refine and optimize day-to-day operations",
           status: "planned",
         },
         {
           category: "Operations",
-          task: "Document best practices for ongoing scaling",
+          task: "Document best practices and playbooks",
+          status: "planned",
+        },
+        {
+          category: "Operations",
+          task: "Prepare for 2027 strategic initiatives",
           status: "planned",
         },
       ],
@@ -161,7 +181,11 @@ export default function RoadmapTimeline() {
             {phase.items.map((item, itemIndex) => (
               <div
                 key={itemIndex}
-                className="relative bg-white rounded-lg shadow-md p-5 hover:shadow-lg transition-shadow duration-200"
+                className={`relative rounded-lg shadow-md p-5 hover:shadow-lg transition-shadow duration-200 ${
+                  item.highlight
+                    ? "bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-coder-purple/30"
+                    : "bg-white"
+                }`}
               >
                 {/* Timeline Dot */}
                 <div className="absolute -left-[41px] top-7 w-6 h-6 rounded-full bg-gradient-to-br from-coder-purple to-coder-blue border-4 border-white" />
@@ -178,6 +202,11 @@ export default function RoadmapTimeline() {
                         {item.category}
                       </span>
                       <StatusBadge status={item.status} />
+                      {item.highlight && (
+                        <span className="text-xs font-bold text-coder-purple">
+                          🎯 Key Milestone
+                        </span>
+                      )}
                     </div>
                     <p className="text-gray-800 font-medium">{item.task}</p>
                   </div>
