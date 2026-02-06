@@ -1,4 +1,5 @@
 import RoadmapTimeline from "@/components/RoadmapTimeline";
+import { useState } from "react";
 
 export default function Home() {
   return (
@@ -6,13 +7,18 @@ export default function Home() {
       {/* Header */}
       <header className="bg-coder-black border-b border-coder-darkGray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="coder-label text-coder-gray mb-2">2026</div>
-          <h1 className="text-5xl coder-heading text-coder-white">
-            Controllership Roadmap
-          </h1>
-          <p className="mt-3 text-lg text-coder-gray">
-            Strategic initiatives for financial excellence and operational scaling
-          </p>
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <div className="coder-label text-coder-gray mb-2">2026</div>
+              <h1 className="text-5xl coder-heading text-coder-white">
+                Controllership Roadmap
+              </h1>
+              <p className="mt-3 text-lg text-coder-gray">
+                Strategic initiatives for financial excellence and operational scaling
+              </p>
+            </div>
+            <TeamMenu />
+          </div>
         </div>
       </header>
 
@@ -168,12 +174,126 @@ function ObjectiveCard({
   );
 }
 
+"use client";
+
 function PrincipleItem({ text }: { text: string }) {
   return (
     <li className="flex items-start">
       <span className="text-coder-black mr-3 mt-1">•</span>
       <span className="text-coder-black">{text}</span>
     </li>
+  );
+}
+
+function TeamMenu() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="p-2 text-coder-gray hover:text-coder-white transition-colors"
+        aria-label="Team menu"
+      >
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <>
+          <div
+            className="fixed inset-0 z-10"
+            onClick={() => setIsOpen(false)}
+          />
+          <div className="absolute right-0 mt-2 w-80 bg-coder-white border border-coder-gray rounded-lg shadow-lg z-20 overflow-hidden">
+            <div className="bg-coder-black p-4 border-b border-coder-darkGray">
+              <div className="coder-label text-coder-gray mb-1">Team</div>
+              <h3 className="text-xl coder-heading text-coder-white">
+                Accounting Team
+              </h3>
+            </div>
+            <div className="p-4">
+              <div className="space-y-3">
+                <TeamMember
+                  name="Dan"
+                  title="Controller"
+                  level={0}
+                />
+                <TeamMember
+                  name="Marc"
+                  title="Assistant Controller"
+                  level={1}
+                  reportsTo="Dan"
+                />
+                <TeamMember
+                  name="Charlie"
+                  title="Senior Accountant"
+                  level={2}
+                  reportsTo="Marc"
+                />
+                <TeamMember
+                  name="Tayla"
+                  title="Senior Payroll Specialist"
+                  level={1}
+                  reportsTo="Dan"
+                />
+                <div className="ml-8 pt-2 border-t border-coder-gray">
+                  <div className="text-sm text-coder-darkGray italic flex items-center">
+                    <span className="mr-2">→</span>
+                    <div>
+                      <div className="font-medium">Staff Accountant</div>
+                      <div className="text-xs coder-label text-coder-darkGray">
+                        Hiring Early Q4 2026 • Reports to Marc
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function TeamMember({
+  name,
+  title,
+  level,
+  reportsTo,
+}: {
+  name: string;
+  title: string;
+  level: number;
+  reportsTo?: string;
+}) {
+  const indent = level * 32; // 32px per level
+
+  return (
+    <div className={`flex items-start`} style={{ marginLeft: `${indent}px` }}>
+      {level > 0 && <span className="text-coder-darkGray mr-2">→</span>}
+      <div className="flex-1">
+        <div className="font-medium text-coder-black">{name}</div>
+        <div className="text-sm text-coder-darkGray">{title}</div>
+        {reportsTo && (
+          <div className="text-xs coder-label text-coder-darkGray mt-1">
+            Reports to {reportsTo}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
