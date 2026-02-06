@@ -99,6 +99,22 @@ export default function RoadmapTimeline() {
       title: "Optimization & Scaling",
       items: [
         {
+          category: "Tech Stack",
+          task: "Evaluate and optimize accounting technology stack",
+          status: "planned",
+        },
+        {
+          category: "Tech Stack",
+          task: "Plan migration from NetSuite to Campfire",
+          status: "planned",
+          highlight: true,
+        },
+        {
+          category: "Tech Stack",
+          task: "Document current system dependencies and workflows",
+          status: "planned",
+        },
+        {
           category: "Operations",
           task: "Optimize accounting workflows for efficiency",
           status: "planned",
@@ -129,6 +145,16 @@ export default function RoadmapTimeline() {
       phase: "Q4 2026",
       title: "Scale & Continuous Improvement",
       items: [
+        {
+          category: "Tech Stack",
+          task: "Begin phased NetSuite to Campfire migration",
+          status: "planned",
+        },
+        {
+          category: "Tech Stack",
+          task: "Test and validate Campfire integrations",
+          status: "planned",
+        },
         {
           category: "Operations",
           task: "Scale processes to support company growth",
@@ -222,6 +248,7 @@ function getCategoryColor(category: string): string {
     "Audit Preparation": "text-coder-darkGray",
     Audit: "text-coder-darkGray",
     Operations: "text-coder-black",
+    "Tech Stack": "text-coder-black",
   };
   return colors[category] || "text-coder-darkGray";
 }
