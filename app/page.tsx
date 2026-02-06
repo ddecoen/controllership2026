@@ -65,9 +65,43 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Controllership Function Themes */}
+        <section className="mb-20 bg-coder-lightGray border border-coder-gray rounded-lg p-12">
+          <div className="coder-label text-coder-darkGray mb-4">Current State</div>
+          <h2 className="text-4xl coder-heading text-coder-black mb-8">
+            Controllership Function Themes
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <ThemeCard
+              title="Reliable Financial Operations"
+              description="Ensure accurate and timely financial reporting, month-end close, and day-to-day accounting operations that the business can depend on."
+            />
+            <ThemeCard
+              title="Strategic Business Partnership"
+              description="Partner closely with Finance and Leadership to provide data-driven insights, support decision-making, and enable business growth."
+            />
+            <ThemeCard
+              title="Compliance & Risk Management"
+              description="Maintain SOX compliance, manage audit relationships, and build robust internal controls as the company scales."
+            />
+            <ThemeCard
+              title="Process Excellence & Automation"
+              description="Continuously improve workflows, implement automation tools, and streamline operations to increase efficiency and reduce manual work."
+            />
+            <ThemeCard
+              title="Team Development & Culture"
+              description="Build a high-performing accounting team that embodies Coder's values, promotes knowledge sharing, and supports each other's growth."
+            />
+            <ThemeCard
+              title="Scalable Infrastructure"
+              description="Build systems, processes, and documentation that can scale 2-3x without proportional headcount increase."
+            />
+          </div>
+        </section>
+
         {/* Key Objectives Overview */}
         <section className="mb-20">
-          <div className="coder-label text-coder-darkGray mb-3">2026 Overview</div>
+          <div className="coder-label text-coder-darkGray mb-3">2026 Focus Areas</div>
           <h2 className="text-4xl coder-heading text-coder-black mb-10">
             Strategic Priorities
           </h2>
@@ -140,5 +174,24 @@ function PrincipleItem({ text }: { text: string }) {
       <span className="text-coder-black mr-3 mt-1">•</span>
       <span className="text-coder-black">{text}</span>
     </li>
+  );
+}
+
+function ThemeCard({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="bg-coder-white border border-coder-gray rounded-lg p-6 hover:border-coder-black transition-all duration-300">
+      <h3 className="text-xl coder-heading text-coder-black mb-3">
+        {title}
+      </h3>
+      <p className="text-coder-darkGray text-sm leading-relaxed">
+        {description}
+      </p>
+    </div>
   );
 }
