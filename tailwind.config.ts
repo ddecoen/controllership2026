@@ -10,11 +10,38 @@ const config: Config = {
     extend: {
       colors: {
         coder: {
-          purple: "#7C3AED",
-          blue: "#3B82F6",
-          dark: "#1E293B",
-          light: "#F8FAFC",
+          black: "#090B0B",
+          white: "#FFFFFF",
+          gray: "#E3E3E3",
+          darkGray: "#2E3338",
+          lightGray: "#F5F5F5",
+          accent: "#E8CBCD", // Subtle accent from brand
         },
+      },
+      fontFamily: {
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Oxygen",
+          "Ubuntu",
+          "Cantarell",
+          "Fira Sans",
+          "Droid Sans",
+          "Helvetica Neue",
+          "sans-serif",
+        ],
+        mono: [
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "Liberation Mono",
+          "Courier New",
+          "monospace",
+        ],
       },
     },
   },

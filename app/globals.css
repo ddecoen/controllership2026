@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --coder-purple: #7C3AED;
-  --coder-blue: #3B82F6;
-  --coder-dark: #1E293B;
-  --coder-light: #F8FAFC;
+  --coder-black: #090B0B;
+  --coder-white: #FFFFFF;
+  --coder-gray: #E3E3E3;
+  --coder-dark-gray: #2E3338;
+  --coder-light-gray: #F5F5F5;
+  --coder-accent: #E8CBCD;
 }
 
 body {
@@ -15,10 +17,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--coder-black);
+  background-color: var(--coder-white);
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* Coder Brand Styles */
+@layer components {
+  .coder-heading {
+    @apply font-sans font-bold tracking-tight;
+  }
+  
+  .coder-label {
+    @apply font-mono text-xs uppercase tracking-wider;
   }
 }

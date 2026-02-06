@@ -159,56 +159,52 @@ export default function RoadmapTimeline() {
   ];
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-16">
       {phases.map((phase, phaseIndex) => (
         <div key={phaseIndex} className="relative">
           {/* Phase Header */}
-          <div className="flex items-center mb-6">
-            <div className="flex-shrink-0 w-32">
-              <div className="bg-gradient-to-r from-coder-purple to-coder-blue text-white px-4 py-2 rounded-lg text-center font-bold">
+          <div className="flex items-center mb-8">
+            <div className="flex-shrink-0 w-24">
+              <div className="bg-coder-black text-coder-white px-4 py-3 text-center coder-label">
                 {phase.phase}
               </div>
             </div>
-            <div className="ml-6">
-              <h3 className="text-2xl font-bold text-coder-dark">
+            <div className="ml-8">
+              <h3 className="text-3xl coder-heading text-coder-black">
                 {phase.title}
               </h3>
             </div>
           </div>
 
           {/* Timeline Items */}
-          <div className="ml-16 border-l-4 border-coder-purple/20 pl-8 space-y-6">
+          <div className="ml-12 border-l-2 border-coder-gray pl-12 space-y-4">
             {phase.items.map((item, itemIndex) => (
               <div
                 key={itemIndex}
-                className={`relative rounded-lg shadow-md p-5 hover:shadow-lg transition-shadow duration-200 ${
+                className={`relative border rounded-lg p-6 transition-all duration-200 ${
                   item.highlight
-                    ? "bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-coder-purple/30"
-                    : "bg-white"
+                    ? "bg-coder-accent/10 border-coder-black border-2"
+                    : "bg-coder-lightGray border-coder-gray hover:border-coder-darkGray"
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute -left-[41px] top-7 w-6 h-6 rounded-full bg-gradient-to-br from-coder-purple to-coder-blue border-4 border-white" />
+                <div className="absolute -left-[51px] top-7 w-4 h-4 rounded-full bg-coder-black border-4 border-coder-white" />
 
                 {/* Content */}
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(
-                          item.category
-                        )}`}
-                      >
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className={`coder-label ${getCategoryColor(item.category)}`}>
                         {item.category}
                       </span>
                       <StatusBadge status={item.status} />
                       {item.highlight && (
-                        <span className="text-xs font-bold text-coder-purple">
-                          🎯 Key Milestone
+                        <span className="coder-label text-coder-black">
+                          ★ Key Milestone
                         </span>
                       )}
                     </div>
-                    <p className="text-gray-800 font-medium">{item.task}</p>
+                    <p className="text-coder-black font-medium leading-relaxed">{item.task}</p>
                   </div>
                 </div>
               </div>
@@ -222,12 +218,12 @@ export default function RoadmapTimeline() {
 
 function getCategoryColor(category: string): string {
   const colors: { [key: string]: string } = {
-    Fundraising: "bg-green-100 text-green-800",
-    "Audit Preparation": "bg-blue-100 text-blue-800",
-    Audit: "bg-blue-100 text-blue-800",
-    Operations: "bg-purple-100 text-purple-800",
+    Fundraising: "text-coder-black",
+    "Audit Preparation": "text-coder-darkGray",
+    Audit: "text-coder-darkGray",
+    Operations: "text-coder-black",
   };
-  return colors[category] || "bg-gray-100 text-gray-800";
+  return colors[category] || "text-coder-darkGray";
 }
 
 function StatusBadge({ status }: { status: string }) {
@@ -236,24 +232,22 @@ function StatusBadge({ status }: { status: string }) {
   } = {
     "in-progress": {
       label: "In Progress",
-      className: "bg-yellow-100 text-yellow-800 border-yellow-300",
+      className: "bg-coder-black text-coder-white",
     },
     planned: {
       label: "Planned",
-      className: "bg-gray-100 text-gray-700 border-gray-300",
+      className: "bg-coder-white text-coder-black border border-coder-gray",
     },
     completed: {
       label: "Completed",
-      className: "bg-green-100 text-green-800 border-green-300",
+      className: "bg-coder-darkGray text-coder-white",
     },
   };
 
   const config = statusConfig[status] || statusConfig.planned;
 
   return (
-    <span
-      className={`px-2 py-1 rounded text-xs font-medium border ${config.className}`}
-    >
+    <span className={`px-3 py-1 text-xs font-mono font-medium ${config.className}`}>
       {config.label}
     </span>
   );
