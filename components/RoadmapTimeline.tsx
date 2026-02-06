@@ -31,6 +31,11 @@ export default function RoadmapTimeline() {
           highlight: true,
         },
         {
+          category: "Operations",
+          task: "Use Inscope to prepare monthly financial statements",
+          status: "in-progress",
+        },
+        {
           category: "Audit Preparation",
           task: "Book audit clean-up entries (Stock Comp & ASC 606)",
           status: "in-progress",
@@ -77,6 +82,11 @@ export default function RoadmapTimeline() {
           task: "Implement Rivet for Tax Preparation and filing",
           status: "planned",
           highlight: true,
+        },
+        {
+          category: "Operations",
+          task: "Continue using Inscope for financial statement preparation",
+          status: "planned",
         },
         {
           category: "Audit",
