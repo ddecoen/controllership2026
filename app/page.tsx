@@ -300,7 +300,7 @@ function TeamMenu({ onShowOrgChart }: { onShowOrgChart: () => void }) {
                   reportsTo="Marc"
                 />
                 <TeamMember
-                  name="Tayla"
+                  name="Talya"
                   title="Senior Payroll Specialist"
                   level={1}
                   reportsTo="Dan"
@@ -444,14 +444,14 @@ function OrgChartModal({ onClose }: { onClose: () => void }) {
                 </div>
               </div>
 
-              {/* Tayla's Branch */}
+              {/* Talya's Branch */}
               <div className="flex flex-col items-center space-y-4">
-                {/* Vertical line down to Tayla */}
+                {/* Vertical line down to Talya */}
                 <div className="w-1 h-12 bg-coder-black"></div>
                 
                 <div className="bg-coder-lightGray border-2 border-coder-gray rounded-lg p-5 text-center min-w-[200px]">
                   <div className="coder-label text-coder-darkGray mb-2">Senior Payroll Specialist</div>
-                  <div className="text-lg font-bold text-coder-black">Tayla</div>
+                  <div className="text-lg font-bold text-coder-black">Talya</div>
                   <div className="text-xs text-coder-darkGray mt-2">Reports to Dan</div>
                 </div>
               </div>
