@@ -4,6 +4,9 @@ import RoadmapTimeline from "@/components/RoadmapTimeline";
 import { useState } from "react";
 
 export default function Home() {
+  const [showOrgChart, setShowOrgChart] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
+
   return (
     <main className="min-h-screen bg-coder-white">
       {/* Header */}
