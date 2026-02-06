@@ -79,7 +79,7 @@ export default function RoadmapTimeline() {
         },
         {
           category: "Tax & Compliance",
-          task: "Implement Rivet for Tax Preparation and filing",
+          task: "Rivet completes tax return filing or extension",
           status: "planned",
           highlight: true,
         },
