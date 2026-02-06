@@ -381,7 +381,7 @@ function OrgChartModal({ onClose }: { onClose: () => void }) {
         
         <div className="p-8">
           {/* Visual Org Chart */}
-          <div className="flex flex-col items-center space-y-8">
+          <div className="flex flex-col items-center space-y-4">
             {/* Dan - Controller */}
             <div className="flex flex-col items-center">
               <div className="bg-coder-black text-coder-white rounded-lg p-6 text-center min-w-[200px]">
@@ -390,13 +390,22 @@ function OrgChartModal({ onClose }: { onClose: () => void }) {
               </div>
             </div>
 
-            {/* Vertical Line */}
-            <div className="w-0.5 h-8 bg-coder-gray"></div>
+            {/* Vertical Line from Dan */}
+            <div className="w-1 h-12 bg-coder-black"></div>
+
+            {/* Horizontal connector line for Dan's reports */}
+            <div className="relative w-[600px] h-1 bg-coder-black">
+              <div className="absolute left-1/4 -translate-x-1/2 -top-px w-1 h-1 bg-coder-black"></div>
+              <div className="absolute right-1/4 translate-x-1/2 -top-px w-1 h-1 bg-coder-black"></div>
+            </div>
 
             {/* Marc and Tayla - Direct Reports */}
-            <div className="flex items-start justify-center gap-16">
+            <div className="flex items-start justify-center gap-32">
               {/* Marc's Branch */}
               <div className="flex flex-col items-center space-y-4">
+                {/* Vertical line down to Marc */}
+                <div className="w-1 h-12 bg-coder-black"></div>
+                
                 <div className="bg-coder-darkGray text-coder-white rounded-lg p-6 text-center min-w-[200px]">
                   <div className="coder-label text-coder-gray mb-2">Assistant Controller</div>
                   <div className="text-xl font-bold">Marc</div>
@@ -404,31 +413,46 @@ function OrgChartModal({ onClose }: { onClose: () => void }) {
                 </div>
                 
                 {/* Vertical Line to Marc's Reports */}
-                <div className="w-0.5 h-8 bg-coder-gray"></div>
+                <div className="w-1 h-12 bg-coder-black"></div>
+
+                {/* Horizontal connector for Marc's reports */}
+                <div className="relative w-[400px] h-1 bg-coder-black">
+                  <div className="absolute left-1/4 -translate-x-1/2 -top-px w-1 h-1 bg-coder-black"></div>
+                  <div className="absolute right-1/4 translate-x-1/2 -top-px w-1 h-1 bg-coder-black"></div>
+                </div>
 
                 {/* Charlie and Future Hire */}
-                <div className="flex items-start gap-8">
-                  <div className="bg-coder-lightGray border-2 border-coder-gray rounded-lg p-5 text-center min-w-[180px]">
-                    <div className="coder-label text-coder-darkGray mb-2">Senior Accountant</div>
-                    <div className="text-lg font-bold text-coder-black">Charlie</div>
-                    <div className="text-xs text-coder-darkGray mt-2">Reports to Marc</div>
+                <div className="flex items-start gap-16">
+                  <div className="flex flex-col items-center">
+                    <div className="w-1 h-12 bg-coder-black"></div>
+                    <div className="bg-coder-lightGray border-2 border-coder-gray rounded-lg p-5 text-center min-w-[180px]">
+                      <div className="coder-label text-coder-darkGray mb-2">Senior Accountant</div>
+                      <div className="text-lg font-bold text-coder-black">Charlie</div>
+                      <div className="text-xs text-coder-darkGray mt-2">Reports to Marc</div>
+                    </div>
                   </div>
                   
-                  <div className="bg-coder-lightGray border-2 border-dashed border-coder-darkGray rounded-lg p-5 text-center min-w-[180px]">
-                    <div className="coder-label text-coder-darkGray mb-2">Staff Accountant</div>
-                    <div className="text-lg font-bold text-coder-darkGray italic">TBD</div>
-                    <div className="text-xs text-coder-darkGray mt-2">Hiring Early Q4 2026</div>
-                    <div className="text-xs text-coder-darkGray">Reports to Marc</div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-1 h-12 bg-coder-black"></div>
+                    <div className="bg-coder-lightGray border-2 border-dashed border-coder-darkGray rounded-lg p-5 text-center min-w-[180px]">
+                      <div className="coder-label text-coder-darkGray mb-2">Staff Accountant</div>
+                      <div className="text-lg font-bold text-coder-darkGray italic">TBD</div>
+                      <div className="text-xs text-coder-darkGray mt-2">Hiring Early Q4 2026</div>
+                      <div className="text-xs text-coder-darkGray">Reports to Marc</div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Tayla's Branch */}
-              <div className="flex flex-col items-center">
-                <div className="bg-coder-darkGray text-coder-white rounded-lg p-6 text-center min-w-[200px]">
-                  <div className="coder-label text-coder-gray mb-2">Senior Payroll Specialist</div>
-                  <div className="text-xl font-bold">Tayla</div>
-                  <div className="text-xs text-coder-gray mt-2">Reports to Dan</div>
+              <div className="flex flex-col items-center space-y-4">
+                {/* Vertical line down to Tayla */}
+                <div className="w-1 h-12 bg-coder-black"></div>
+                
+                <div className="bg-coder-lightGray border-2 border-coder-gray rounded-lg p-5 text-center min-w-[200px]">
+                  <div className="coder-label text-coder-darkGray mb-2">Senior Payroll Specialist</div>
+                  <div className="text-lg font-bold text-coder-black">Tayla</div>
+                  <div className="text-xs text-coder-darkGray mt-2">Reports to Dan</div>
                 </div>
               </div>
             </div>
