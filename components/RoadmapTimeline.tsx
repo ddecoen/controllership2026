@@ -99,6 +99,21 @@ export default function RoadmapTimeline() {
       title: "Optimization & Scaling",
       items: [
         {
+          category: "EMEA Expansion",
+          task: "Research EMEA entity location: Netherlands vs Ireland",
+          status: "planned",
+        },
+        {
+          category: "EMEA Expansion",
+          task: "Evaluate tax implications and regulatory requirements",
+          status: "planned",
+        },
+        {
+          category: "EMEA Expansion",
+          task: "Assess accounting and compliance infrastructure needs",
+          status: "planned",
+        },
+        {
           category: "Tech Stack",
           task: "Evaluate and optimize accounting technology stack",
           status: "planned",
@@ -145,6 +160,27 @@ export default function RoadmapTimeline() {
       phase: "Q4 2026",
       title: "Scale & Continuous Improvement",
       items: [
+        {
+          category: "EMEA Expansion",
+          task: "Finalize EMEA entity location decision",
+          status: "planned",
+        },
+        {
+          category: "EMEA Expansion",
+          task: "Initiate entity formation and registration process",
+          status: "planned",
+          highlight: true,
+        },
+        {
+          category: "EMEA Expansion",
+          task: "Set up banking, accounting, and payroll infrastructure",
+          status: "planned",
+        },
+        {
+          category: "EMEA Expansion",
+          task: "Establish transfer pricing and intercompany policies",
+          status: "planned",
+        },
         {
           category: "Tech Stack",
           task: "Begin phased NetSuite to Campfire migration",
@@ -249,6 +285,7 @@ function getCategoryColor(category: string): string {
     Audit: "text-coder-darkGray",
     Operations: "text-coder-black",
     "Tech Stack": "text-coder-black",
+    "EMEA Expansion": "text-coder-black",
   };
   return colors[category] || "text-coder-darkGray";
 }
