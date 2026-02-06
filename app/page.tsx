@@ -19,7 +19,7 @@ export default function Home() {
                 Strategic initiatives for financial excellence and operational scaling
               </p>
             </div>
-            <TeamMenu />
+            <TeamMenu onShowOrgChart={() => setShowOrgChart(true)} />
           </div>
         </div>
       </header>
@@ -118,18 +118,34 @@ export default function Home() {
               title="Fundraising"
               label="Capital"
               description="Secure funding to fuel growth and strategic initiatives"
+              onClick={() => setSelectedFilter(selectedFilter === "Fundraising" ? null : "Fundraising")}
+              isActive={selectedFilter === "Fundraising"}
             />
             <ObjectiveCard
               title="First Audit with Deloitte"
               label="Compliance"
               description="Complete comprehensive financial audit with Deloitte"
+              onClick={() => setSelectedFilter(selectedFilter === "Audit" ? null : "Audit")}
+              isActive={selectedFilter === "Audit"}
             />
             <ObjectiveCard
               title="Operational Excellence"
               label="Process"
               description="Enhance accuracy, efficiency, and scalability of accounting operations"
+              onClick={() => setSelectedFilter(selectedFilter === "Operations" ? null : "Operations")}
+              isActive={selectedFilter === "Operations"}
             />
           </div>
+          {selectedFilter && (
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setSelectedFilter(null)}
+                className="text-sm coder-label text-coder-darkGray hover:text-coder-black transition-colors"
+              >
+                ← Clear Filter • Show All Items
+              </button>
+            </div>
+          )}
         </section>
 
         {/* Timeline */}
@@ -138,9 +154,14 @@ export default function Home() {
           <h2 className="text-4xl coder-heading text-coder-black mb-10">
             Implementation Roadmap
           </h2>
-          <RoadmapTimeline />
+          <RoadmapTimeline filter={selectedFilter} />
         </section>
       </div>
+
+      {/* Org Chart Modal */}
+      {showOrgChart && (
+        <OrgChartModal onClose={() => setShowOrgChart(false)} />
+      )}
 
       {/* Footer */}
       <footer className="bg-coder-black border-t border-coder-darkGray mt-24 py-12">
@@ -158,21 +179,43 @@ function ObjectiveCard({
   title,
   label,
   description,
+  onClick,
+  isActive,
 }: {
   title: string;
   label: string;
   description: string;
+  onClick: () => void;
+  isActive: boolean;
 }) {
   return (
-    <div className="bg-coder-lightGray border border-coder-gray rounded-lg overflow-hidden hover:border-coder-black transition-all duration-300 group">
+    <button
+      onClick={onClick}
+      className={`w-full text-left rounded-lg overflow-hidden transition-all duration-300 group ${
+        isActive
+          ? "bg-coder-black border-2 border-coder-black"
+          : "bg-coder-lightGray border border-coder-gray hover:border-coder-black"
+      }`}
+    >
       <div className="p-8">
-        <div className="coder-label text-coder-darkGray mb-4">{label}</div>
-        <h3 className="text-2xl coder-heading text-coder-black mb-3 group-hover:text-coder-darkGray transition-colors">
+        <div className={`coder-label mb-4 ${isActive ? "text-coder-gray" : "text-coder-darkGray"}`}>
+          {label}
+        </div>
+        <h3 className={`text-2xl coder-heading mb-3 transition-colors ${
+          isActive ? "text-coder-white" : "text-coder-black group-hover:text-coder-darkGray"
+        }`}>
           {title}
         </h3>
-        <p className="text-coder-darkGray leading-relaxed">{description}</p>
+        <p className={`leading-relaxed ${isActive ? "text-coder-gray" : "text-coder-darkGray"}`}>
+          {description}
+        </p>
+        {isActive && (
+          <div className="mt-4 text-coder-gray text-sm">
+            ✓ Filtering roadmap
+          </div>
+        )}
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -185,8 +228,13 @@ function PrincipleItem({ text }: { text: string }) {
   );
 }
 
-function TeamMenu() {
+function TeamMenu({ onShowOrgChart }: { onShowOrgChart: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleOrgChartClick = () => {
+    setIsOpen(false);
+    onShowOrgChart();
+  };
 
   return (
     <div className="relative">
@@ -224,6 +272,12 @@ function TeamMenu() {
               </h3>
             </div>
             <div className="p-4">
+              <button
+                onClick={handleOrgChartClick}
+                className="w-full mb-4 p-3 bg-coder-black text-coder-white rounded-lg hover:bg-coder-darkGray transition-colors text-center coder-label"
+              >
+                View Org Chart →
+              </button>
               <div className="space-y-3">
                 <TeamMember
                   name="Dan"
@@ -292,6 +346,114 @@ function TeamMember({
             Reports to {reportsTo}
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+function OrgChartModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-coder-black/80">
+      <div
+        className="absolute inset-0"
+        onClick={onClose}
+      />
+      <div className="relative bg-coder-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-auto">
+        <div className="sticky top-0 bg-coder-black p-6 border-b border-coder-darkGray flex items-center justify-between z-10">
+          <div>
+            <div className="coder-label text-coder-gray mb-1">Organization</div>
+            <h2 className="text-3xl coder-heading text-coder-white">
+              Accounting Team Structure
+            </h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-coder-gray hover:text-coder-white transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <div className="p-8">
+          {/* Visual Org Chart */}
+          <div className="flex flex-col items-center space-y-8">
+            {/* Dan - Controller */}
+            <div className="flex flex-col items-center">
+              <div className="bg-coder-black text-coder-white rounded-lg p-6 text-center min-w-[200px]">
+                <div className="coder-label text-coder-gray mb-2">Controller</div>
+                <div className="text-xl font-bold">Dan</div>
+              </div>
+            </div>
+
+            {/* Vertical Line */}
+            <div className="w-0.5 h-8 bg-coder-gray"></div>
+
+            {/* Marc and Tayla - Direct Reports */}
+            <div className="flex items-start justify-center gap-16">
+              {/* Marc's Branch */}
+              <div className="flex flex-col items-center space-y-4">
+                <div className="bg-coder-darkGray text-coder-white rounded-lg p-6 text-center min-w-[200px]">
+                  <div className="coder-label text-coder-gray mb-2">Assistant Controller</div>
+                  <div className="text-xl font-bold">Marc</div>
+                  <div className="text-xs text-coder-gray mt-2">Reports to Dan</div>
+                </div>
+                
+                {/* Vertical Line to Marc's Reports */}
+                <div className="w-0.5 h-8 bg-coder-gray"></div>
+
+                {/* Charlie and Future Hire */}
+                <div className="flex items-start gap-8">
+                  <div className="bg-coder-lightGray border-2 border-coder-gray rounded-lg p-5 text-center min-w-[180px]">
+                    <div className="coder-label text-coder-darkGray mb-2">Senior Accountant</div>
+                    <div className="text-lg font-bold text-coder-black">Charlie</div>
+                    <div className="text-xs text-coder-darkGray mt-2">Reports to Marc</div>
+                  </div>
+                  
+                  <div className="bg-coder-lightGray border-2 border-dashed border-coder-darkGray rounded-lg p-5 text-center min-w-[180px]">
+                    <div className="coder-label text-coder-darkGray mb-2">Staff Accountant</div>
+                    <div className="text-lg font-bold text-coder-darkGray italic">TBD</div>
+                    <div className="text-xs text-coder-darkGray mt-2">Hiring Early Q4 2026</div>
+                    <div className="text-xs text-coder-darkGray">Reports to Marc</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tayla's Branch */}
+              <div className="flex flex-col items-center">
+                <div className="bg-coder-darkGray text-coder-white rounded-lg p-6 text-center min-w-[200px]">
+                  <div className="coder-label text-coder-gray mb-2">Senior Payroll Specialist</div>
+                  <div className="text-xl font-bold">Tayla</div>
+                  <div className="text-xs text-coder-gray mt-2">Reports to Dan</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Legend */}
+          <div className="mt-12 pt-6 border-t border-coder-gray">
+            <div className="coder-label text-coder-darkGray mb-4">Legend</div>
+            <div className="flex flex-wrap gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-coder-black rounded"></div>
+                <span className="text-coder-darkGray">Leadership</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-coder-darkGray rounded"></div>
+                <span className="text-coder-darkGray">Management</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-coder-lightGray border-2 border-coder-gray rounded"></div>
+                <span className="text-coder-darkGray">Individual Contributor</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-coder-lightGray border-2 border-dashed border-coder-darkGray rounded"></div>
+                <span className="text-coder-darkGray">Future Hire</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

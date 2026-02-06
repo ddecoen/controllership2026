@@ -13,7 +13,7 @@ interface Phase {
   items: TimelineItem[];
 }
 
-export default function RoadmapTimeline() {
+export default function RoadmapTimeline({ filter }: { filter?: string | null }) {
   const phases = [
     {
       phase: "Q1 2026",
@@ -242,9 +242,27 @@ export default function RoadmapTimeline() {
     },
   ];
 
+  // Filter phases based on selected category
+  const getFilteredPhases = () => {
+    if (!filter) return phases;
+    
+    return phases.map(phase => ({
+      ...phase,
+      items: phase.items.filter(item => {
+        if (filter === "Audit") {
+          return item.category === "Audit" || item.category === "Audit Preparation";
+        }
+        return item.category === filter || 
+               (filter === "Operations" && ["Tech Stack", "EMEA Expansion", "Tax & Compliance"].includes(item.category));
+      })
+    })).filter(phase => phase.items.length > 0);
+  };
+
+  const filteredPhases = getFilteredPhases();
+
   return (
     <div className="space-y-16">
-      {phases.map((phase, phaseIndex) => (
+      {filteredPhases.map((phase, phaseIndex) => (
         <div key={phaseIndex} className="relative">
           {/* Phase Header */}
           <div className="flex items-center mb-8">
